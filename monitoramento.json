@@ -76,6 +76,18 @@
                     "autoextend" : "true"
                 }
             ]
+        },
+          {
+            "sid": "helpdesk",
+            "user": "helpdesk",
+            "password": "deskhelp",
+            "modules" : [
+                {
+                    "name" : "connection_time",
+                    "warning" : "5000",
+                    "critical" : "10000"
+                }
+            ]
         }
     ]
 }

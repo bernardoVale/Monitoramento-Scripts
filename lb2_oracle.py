@@ -20,6 +20,7 @@ import check_dbgrowth
 import check_ora_tps
 import check_ora_users
 import check_tablespaces
+import check_connection_time
 from monitoramento_utils import Utils
 
 
@@ -97,6 +98,9 @@ class Database:
             check_archives.main(self.sid, self.user, self.password,
                                 self.module['warning'], self.module['critical'],
                                 self.module['asm'], self.module['localdisk'])
+        elif self.module['name'] == 'connection_time':
+            check_connection_time.main(self.sid, self.user, self.password,
+                                self.module['warning'], self.module['critical'])
 
 
 def main(argv):
