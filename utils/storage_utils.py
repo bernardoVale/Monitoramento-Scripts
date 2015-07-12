@@ -10,7 +10,9 @@
 #       Versão: v1.0
 #       LB2 Consultoria - Leading Business 2 the Next Level!
 import os
-from monitoramento_utils import Utils
+
+from utils.monitoramento_utils import Utils
+
 
 class Storage:
 

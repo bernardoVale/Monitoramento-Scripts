@@ -12,7 +12,8 @@
 #---------------------------------------------------------------
 import datetime
 import json
-from monitoramento_utils import Utils
+
+from utils.monitoramento_utils import Utils
 
 
 class Issues:

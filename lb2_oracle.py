@@ -12,7 +12,8 @@
 #---------------------------------------------------------------
 import json
 import sys
-from monitoramento_utils import Utils
+
+from utils.monitoramento_utils import Utils
 
 
 class Connection:

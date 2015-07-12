@@ -1,9 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from monitoramento_utils import Utils
-from utils.database_utils import Db
-import time
 import datetime
+
+from utils.database_utils import Db
+
 
 __author__ = 'Bruno Teruya'
 __copyright__ = 'LB2 Consultoria'

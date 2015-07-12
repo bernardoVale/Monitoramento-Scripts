@@ -11,7 +11,7 @@
 #       LB2 Consultoria - Leading Business 2 the Next Level!
 #---------------------------------------------------------------
 
-from monitoramento_utils import Utils
+from utils.monitoramento_utils import Utils
 
 def wrap_schemas(schemas):
     """

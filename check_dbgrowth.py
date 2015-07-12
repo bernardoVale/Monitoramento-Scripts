@@ -3,8 +3,7 @@
 import datetime
 import json
 
-from dbgrowth_utils import GrowthUtils
-from monitoramento_utils import Utils
+from utils.monitoramento_utils import Utils
 from utils.storage_utils import Storage
 
 

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from monitoramento_utils import Utils
+from utils.monitoramento_utils import Utils
 
 __author__ = 'Bernardo Vale'
 __copyright__ = 'LB2 Consultoria'
