@@ -5,7 +5,7 @@ from monitoramento_utils import Utils
 __author__ = 'Bernardo Vale'
 __copyright__ = 'LB2 Consultoria'
 
-def main(sid, user, pwd, warning):
+def main(user, sid, password, warning):
     #sid, user, pwd, warning
         #parse_argsv2(sys.argv[1:])
     result = ''
@@ -31,9 +31,9 @@ def main(sid, user, pwd, warning):
     end; \n \
     /"
     if user.lower() == 'sys':
-        result = Utils.run_sqlplus(pwd, user, sid, query, True, True)
+        result = Utils.run_sqlplus(password, user, sid, query, True, True)
     else:
-        result = Utils.run_sqlplus(pwd, user, sid, query, True, False)
+        result = Utils.run_sqlplus(password, user, sid, query, True, False)
     perf_data = ''
     total = 0
     if 'ORA-' in result:

@@ -8,14 +8,14 @@ import datetime
 __author__ = 'Bruno Teruya'
 __copyright__ = 'LB2 Consultoria'
 
-def main(sid, user, pwd, warning, critical):
+def main(sid, user, password, warning, critical):
     result = ''
     query = "set head off \n \
     set feedback off \n \
     select 1.0 valor from dual;"
     inicio = datetime.datetime.now()
     #time.sleep(11)
-    Db.single_int_query(user, pwd, sid, query)
+    Db.single_int_query(user, password, sid, query)
 
     fim = datetime.datetime.now()
     if 'ORA-' in result:

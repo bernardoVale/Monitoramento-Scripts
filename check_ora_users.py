@@ -65,14 +65,14 @@ def get_my_query(schemas,sum):
               where username not in ("+not_this_schemas+")\
              group by username;"
 
-def main(sid, user, pwd, warning, sum, schemas):
+def main(sid, user, password, warning, sum, schemas):
     #args = parse_args()
     query = get_my_query(schemas,sum)
     result = ''
     if user.lower() == 'sys':
-        result = Utils.run_sqlplus(pwd, user, sid, query, True, True)
+        result = Utils.run_sqlplus(password, user, sid, query, True, True)
     else:
-        result = Utils.run_sqlplus(pwd, user, sid, query, True, False)
+        result = Utils.run_sqlplus(password, user, sid, query, True, False)
     perf_data = ''
     total = 0
     if 'ORA-' in result:
