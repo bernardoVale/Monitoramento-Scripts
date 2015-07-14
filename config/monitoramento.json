@@ -6,34 +6,46 @@
             "password": "pulga",
             "modules" : [
                 {
+                    "script" : "check_alert.py",
                     "name" : "alertlog",
                     "logfile" : "/Users/bernardovale/PycharmProjects/Monitoramento Scripts/alertlog.log",
                     "clear_time" : 60,
-                    "config" : "/Users/bernardovale/PycharmProjects/Monitoramento Scripts/alertlog.json"
+                    "config" : "/Users/bernardovale/PycharmProjects/Monitoramento Scripts/config/alertlog.json"
                 },
                 {
+                    "script" : "check_tablespaces.py",
                     "name" : "tablespaces",
                     "warning" : "96",
                     "critical" : "98",
                     "autoextend" : true
                 },
                 {
+                    "script" : "check_ora_tps.py",
                     "name" : "tps",
                     "warning" :"50"
                 },
                 {
+                    "script" : "check_connection_time.py",
+                    "name" : "connection_time",
+                    "warning" : "5000",
+                    "critical" : "10000"
+                },
+                {
+                    "script" : "check_ora_users.py",
                     "name" : "users",
                     "warning" : "100",
                     "sum" : true,
                     "schemas" : "LB2_TOTVS"
                 },
                 {
+                    "script" : "check_dbgrowth.py",
                     "name" : "dbgrowth",
                     "disktime" : true,
-                    "localdisk" : "",
-                    "asm" : "DATA"
+                    "localdisk" : "/",
+                    "asm" : ""
                 },
                 {
+                    "script" : "check_archives.py",
                     "name" : "archives",
                     "localdisk" : "/",
                     "asm" : "",
@@ -41,6 +53,7 @@
                     "critical" : 24
                 },
                 {
+                    "script" : "check_backup.py",
                     "name" : "rman",
                     "yesterday" : false,
                     "path" : "/Users/bernardovale/PycharmProjects/",
@@ -50,6 +63,7 @@
                     "ignore_file" : null
                 },
                 {
+                    "script" : "check_backup.py",
                     "name" : "datapump",
                     "yesterday" : false,
                     "path" : "/Users/bernardovale/PycharmProjects/",
@@ -74,6 +88,18 @@
                     "warning" : "95",
                     "critical" : "97",
                     "autoextend" : "true"
+                }
+            ]
+        },
+          {
+            "sid": "helpdesk",
+            "user": "helpdesk",
+            "password": "deskhelp",
+            "modules" : [
+                {
+                    "name" : "connection_time",
+                    "warning" : "5000",
+                    "critical" : "10000"
                 }
             ]
         }

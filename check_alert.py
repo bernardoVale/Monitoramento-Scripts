@@ -12,7 +12,8 @@
 #---------------------------------------------------------------
 import datetime
 import json
-from monitoramento_utils import Utils
+
+from utils.monitoramento_utils import Utils
 
 
 class Issues:
@@ -61,8 +62,8 @@ class Monitoring:
         clean_time
         :return:
         """
-        if Utils.file_exists_not_empty(Utils.fullpath('alertlog_errors.json')):
-            error_list = Utils.read_json(Utils.fullpath('alertlog_errors.json'))
+        if Utils.file_exists_not_empty(Utils.fullpath('data/alertlog_errors.json')):
+            error_list = Utils.read_json(Utils.fullpath('data/alertlog_errors.json'))
             error_list = [error for error in error_list if not self.error_is_cleared(error['date'])]
             self.error_list = error_list
         else:
@@ -74,7 +75,7 @@ class Monitoring:
         Escreve no disco o novo json de erros
         :return:
         """
-        with open(Utils.fullpath('alertlog_errors.json'), 'w') as f:
+        with open(Utils.fullpath('data/alertlog_errors.json'), 'w') as f:
             try:
                 json.dump(self.error_list, f)
             except:
@@ -124,8 +125,8 @@ class Monitoring:
                     return
 
     def read_partial_file(self):
-        if Utils.file_exists(Utils.fullpath('check_alertlog.tmp')):
-            with open(Utils.fullpath('check_alertlog.tmp'), 'r') as f:
+        if Utils.file_exists(Utils.fullpath('data/check_alertlog.tmp')):
+            with open(Utils.fullpath('data/check_alertlog.tmp'), 'r') as f:
                 try:
                     f.seek(0)
                     file_content = f.readline()
@@ -134,7 +135,7 @@ class Monitoring:
                     print "UNKNOWN - Impossivel ler logfile."
                     exit(3)
         else:
-            with open(Utils.fullpath('check_alertlog.tmp'), 'a') as f:
+            with open(Utils.fullpath('data/check_alertlog.tmp'), 'a') as f:
                 try:
                     f.write('0')
                     self.last_position = 0
@@ -193,7 +194,7 @@ class Monitoring:
         :param lines_read: Numero de linhas lidas
         """
         self.last_position = int(self.last_position) + int(lines_read)
-        with open(Utils.fullpath('check_alertlog.tmp'), 'w') as f:
+        with open(Utils.fullpath('data/check_alertlog.tmp'), 'w') as f:
             try:
                 f.write(str(self.last_position))
             except:
@@ -206,7 +207,7 @@ class Monitoring:
         return perf_data
 
     def clear_log_position(self):
-        with open(Utils.fullpath('check_alertlog.tmp'), 'w') as f:
+        with open(Utils.fullpath('data/check_alertlog.tmp'), 'w') as f:
             try:
                 f.write("0")
             except:

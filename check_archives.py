@@ -9,7 +9,6 @@
 #       email: bernardo.vale@lb2.com.br
 #       Versão: v1.0
 #       LB2 Consultoria - Leading Business 2 the Next Level!
-from monitoramento_utils import Utils
 from utils.database_utils import Db
 from utils.storage_utils import Storage
 

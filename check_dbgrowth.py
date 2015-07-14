@@ -3,8 +3,7 @@
 import datetime
 import json
 
-from dbgrowth_utils import GrowthUtils
-from monitoramento_utils import Utils
+from utils.monitoramento_utils import Utils
 from utils.storage_utils import Storage
 
 
@@ -136,7 +135,7 @@ class Monitoring:
         Escreve no disco o novo json de erros
         :return:
         """
-        with open(Utils.fullpath('dbgrowth_data.json'), 'w') as f:
+        with open(Utils.fullpath('data/dbgrowth_data.json'), 'w') as f:
             try:
                 json.dump(self.gather_list, f)
             except:
@@ -149,7 +148,7 @@ class Monitoring:
         clean_time
         :return:
         """
-        gather_list = Utils.read_json(Utils.fullpath('dbgrowth_data.json'))
+        gather_list = Utils.read_json(Utils.fullpath('data/dbgrowth_data.json'))
         self.gather_list = gather_list
 
     def exit_status(self):
