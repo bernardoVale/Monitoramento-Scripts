@@ -173,6 +173,10 @@ class Monitoring:
         :return:
         """
         if Utils.file_exists(self.logfile):
+            num_lines = sum(1 for line in open(self.logfile)) #Issue #16
+            if num_lines <= self.last_position:
+                self.clear_log_position()
+                self.last_position = 0
             with open(self.logfile) as f:
                 for _ in xrange(int(self.last_position)):
                     next(f)
