@@ -97,9 +97,11 @@
             "password": "deskhelp",
             "modules" : [
                 {
-                    "name" : "connection_time",
-                    "warning" : "5000",
-                    "critical" : "10000"
+                    "script" : "check_alert.py",
+                    "name" : "alertlog",
+                    "logfile" : "/Users/bernardovale/PycharmProjects/Monitoramento Scripts/alertlog.log",
+                    "clear_time" : 60,
+                    "config" : "/Users/bernardovale/PycharmProjects/Monitoramento Scripts/config/alertlog.json"
                 }
             ]
         }

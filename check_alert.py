@@ -32,7 +32,7 @@ class Issues:
 
 
 class Monitoring:
-    def __init__(self, logfile, clear_time, config, issues):
+    def __init__(self, sid, logfile, clear_time, config, issues):
         self.logfile = logfile
         self.clear_time = clear_time
         self.config = config
@@ -43,6 +43,8 @@ class Monitoring:
         self.critical_count = 0
         self.error_list = []
         self.lines_counted = 0
+        self.sid = sid
+
 
     def error_is_cleared(self, error_date):
         """
@@ -62,8 +64,8 @@ class Monitoring:
         clean_time
         :return:
         """
-        if Utils.file_exists_not_empty(Utils.fullpath('data/alertlog_errors.json')):
-            error_list = Utils.read_json(Utils.fullpath('data/alertlog_errors.json'))
+        if Utils.file_exists_not_empty(Utils.fullpath('data/alertlog_errors_%s.json' % self.sid)):
+            error_list = Utils.read_json(Utils.fullpath('data/alertlog_errors_%s.json' % self.sid))
             error_list = [error for error in error_list if not self.error_is_cleared(error['date'])]
             self.error_list = error_list
         else:
@@ -75,7 +77,7 @@ class Monitoring:
         Escreve no disco o novo json de erros
         :return:
         """
-        with open(Utils.fullpath('data/alertlog_errors.json'), 'w') as f:
+        with open(Utils.fullpath('data/alertlog_errors_%s.json' % self.sid), 'w') as f:
             try:
                 json.dump(self.error_list, f)
             except:
@@ -125,8 +127,8 @@ class Monitoring:
                     return
 
     def read_partial_file(self):
-        if Utils.file_exists(Utils.fullpath('data/check_alertlog.tmp')):
-            with open(Utils.fullpath('data/check_alertlog.tmp'), 'r') as f:
+        if Utils.file_exists(Utils.fullpath('data/check_alertlog_%s.tmp' % self.sid)):
+            with open(Utils.fullpath('data/check_alertlog_%s.tmp' % self.sid), 'r') as f:
                 try:
                     f.seek(0)
                     file_content = f.readline()
@@ -135,7 +137,7 @@ class Monitoring:
                     print "UNKNOWN - Impossivel ler logfile."
                     exit(3)
         else:
-            with open(Utils.fullpath('data/check_alertlog.tmp'), 'a') as f:
+            with open(Utils.fullpath('data/check_alertlog_%s.tmp' % self.sid), 'a') as f:
                 try:
                     f.write('0')
                     self.last_position = 0
@@ -194,7 +196,7 @@ class Monitoring:
         :param lines_read: Numero de linhas lidas
         """
         self.last_position = int(self.last_position) + int(lines_read)
-        with open(Utils.fullpath('data/check_alertlog.tmp'), 'w') as f:
+        with open(Utils.fullpath('data/check_alertlog_%s.tmp' % self.sid), 'w') as f:
             try:
                 f.write(str(self.last_position))
             except:
@@ -207,7 +209,7 @@ class Monitoring:
         return perf_data
 
     def clear_log_position(self):
-        with open(Utils.fullpath('data/check_alertlog.tmp'), 'w') as f:
+        with open(Utils.fullpath('data/check_alertlog_%s.tmp' % self.sid), 'w') as f:
             try:
                 f.write("0")
             except:
@@ -215,17 +217,19 @@ class Monitoring:
                 exit(3)
 
 
-def main(logfile, clear_time, config):
+def main(sid, user, password, logfile, clear_time, config):
     """
-    Método inicial do script
-
+     Metodo inicial
+    :param sid: Para nomeclatura dos logs
+    :param user: Ignorado
+    :param password: Ignorado
     :param logfile: Caminho para o log
     :param clear_time: Tempo em minutos para limpar o último erro.
     :param config: Arquivo de configuração dos erros.
     :return:
     """
     i = Issues(config)
-    m = Monitoring(logfile, clear_time, config, i)
+    m = Monitoring(sid, logfile, clear_time, config, i)
     m.clear_old_errors()
     m.read_partial_file()
     m.read_log()
